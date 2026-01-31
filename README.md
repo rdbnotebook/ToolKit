@@ -94,6 +94,26 @@ These scripts expect IBKR TWS or IB Gateway to be running locally with API acces
     python parquet/check_parquet_corruption.py
     ```
 
+- `parquet/inspect_parquet.py` – Inspect specific columns or the timestamp index in a Parquet file.
+  - Usage:
+    ```bash
+    python parquet/inspect_parquet.py /path/to/file.parquet "timestamp,open,close"
+    ```
+
+- `parquet/sample_parquet.py` – Sample the first N rows from Parquet files and save to CSV.
+  - Usage:
+    ```bash
+    python parquet/sample_parquet.py --input /path/to/file.parquet --sample-size 200
+    python parquet/sample_parquet.py --directory /path/to/dir --all --sample-size 200
+    ```
+
+- `parquet/sample_5k_parquet.py` – Sample the first 5,000 rows from Parquet files and save to CSV.
+  - Usage:
+    ```bash
+    python parquet/sample_5k_parquet.py --input /path/to/file.parquet
+    python parquet/sample_5k_parquet.py --directory /path/to/dir --all
+    ```
+
 ### Sampling helpers (`sampler/`)
 - `sampler/sampler.py` – Sample the first N rows of CSV/TXT/Parquet files.
 - `sampler/sample-one-line.py` – Sample only the first row.
@@ -118,6 +138,7 @@ python sampler/sample-headers.py --all --directory .
 Python 3.9+ recommended.
 
 Common dependencies:
+- `numpy` (used by `inspect_parquet.py`)
 - `pandas`
 - `pyarrow` (for Parquet tools)
 - `ib_insync` (for IBKR data fetchers)
