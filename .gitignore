@@ -1,0 +1,19 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.log
+
+# Generated outputs
+jsons/
+logs/
+historic_future_data_contracts/
+parquet_corruption_report.txt
+parquet_corruption_check.log
+crawl_dump.txt
+
+# Data exports
+*.csv
+codexbotin.json
+*.parquet
+*.txt
+**/.DS_Store
