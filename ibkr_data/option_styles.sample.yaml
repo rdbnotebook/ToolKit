@@ -1,0 +1,10 @@
+# Sample option style mapping for get_ibkr_options.py
+
+american_style:
+  - SPY
+  - QQQ
+
+european_style:
+  - SPX
+
+default_style: american

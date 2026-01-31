@@ -69,6 +69,9 @@ These scripts expect IBKR TWS or IB Gateway to be running locally with API acces
 - `ibkr_data/get_ibkr_options.py` – Fetch historical options data at multiple bar sizes; can aggregate to EOD.
   - Notes:
     - Requires a YAML config file (default `config/options_intraday.yaml`) and optional `option_styles.yaml`.
+    - Sample configs:
+      - `config/options_intraday.sample.yaml` (copy to `config/options_intraday.yaml`)
+      - `ibkr_data/option_styles.sample.yaml` (copy to `ibkr_data/option_styles.yaml`)
     - By default writes under `data/bronze/ibkr/options/`.
     - Can skip consolidation with `--skip-consolidation` if `ibkr_continuous_builder.py` is not present.
   - Usage:

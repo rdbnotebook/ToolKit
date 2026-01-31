@@ -6,6 +6,7 @@ __pycache__/
 # Generated outputs
 jsons/
 logs/
+max_fetch/
 historic_future_data_contracts/
 parquet_corruption_report.txt
 parquet_corruption_check.log

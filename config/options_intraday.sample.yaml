@@ -1,0 +1,41 @@
+# Sample sanitized config for get_ibkr_options.py
+
+symbols:
+  T1:
+    - SPY
+    - QQQ
+  T2:
+    - IWM
+  T3: []
+
+settings:
+  bar_configs:
+    T1:
+      bar_sizes: ["1 min", "5 mins", "15 mins"]
+    T2:
+      bar_sizes: ["5 mins", "15 mins"]
+    T3:
+      bar_sizes: ["15 mins"]
+  bar_settings:
+    "1 min":
+      max_history_days: 10
+    "5 mins":
+      max_history_days: 30
+    "15 mins":
+      max_history_days: 60
+    "1 day":
+      max_history_days: 365
+  greeks:
+    risk_free_rate: 0.05
+
+quality:
+  min_iv: 0.01
+  max_iv: 5.0
+
+output:
+  base_path: "./data/bronze/ibkr/options"
+
+ib_tws:
+  host: "127.0.0.1"
+  port: 7497
+  client_id: 30
