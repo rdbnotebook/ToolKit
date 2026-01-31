@@ -1,6 +1,6 @@
 # ToolKit
 
-A small collection of Python utilities used for data sampling, IBKR contract lookups, Parquet validation/conversion, and repo housekeeping.
+A collection of Python utilities used for data sampling, IBKR contract lookups, Parquet validation/conversion, and repo housekeeping.
 
 ## Contents
 
@@ -17,6 +17,26 @@ A small collection of Python utilities used for data sampling, IBKR contract loo
 
 ### IBKR utilities (`ibkr_data/`)
 These scripts expect IBKR TWS or IB Gateway to be running locally with API access enabled.
+
+- `ibkr_data/get_ibkr_hist_futures_contracts_1min.py` – Back-fill or update 1-minute data for individual futures contracts (front month and expired).
+  - Notes:
+    - Reads a `securities_daily_update.csv` input (path via `--input-file`).
+    - Writes to `data/bronze/ibkr/futures_contracts/` (or `_bidask/` when `--bid-ask` is used).
+  - Usage:
+    ```bash
+    python ibkr_data/get_ibkr_hist_futures_contracts_1min.py --back-fill --input-file /path/to/securities_daily_update.csv
+    python ibkr_data/get_ibkr_hist_futures_contracts_1min.py --update --ticker ES
+    ```
+
+- `ibkr_data/get_ibkr_historic_1min.py` – Back-fill or update 1-minute data for non-futures securities (stocks/forex/index/crypto).
+  - Notes:
+    - Reads a `securities_daily_update.csv` input (path via `--input-file`).
+    - Writes to `data/bronze/ibkr/historic_data/` (or `_bidask/` when `--bid-ask` is used).
+  - Usage:
+    ```bash
+    python ibkr_data/get_ibkr_historic_1min.py --back-fill --input-file /path/to/securities_daily_update.csv
+    python ibkr_data/get_ibkr_historic_1min.py --update --conid 123
+    ```
 
 - `ibkr_data/get_ticker_jsons.py` – Search IBKR for contracts matching a ticker, pull details, and write a CSV into `./jsons`.
   - Notes:
@@ -44,6 +64,17 @@ These scripts expect IBKR TWS or IB Gateway to be running locally with API acces
     ```bash
     python ibkr_data/get_single_future_contract.py --ticker ZT --contract H25
     python ibkr_data/get_single_future_contract.py --ticker ES --contract M24 --duration "6 M" --fallback
+    ```
+
+- `ibkr_data/get_ibkr_options.py` – Fetch historical options data at multiple bar sizes; can aggregate to EOD.
+  - Notes:
+    - Requires a YAML config file (default `config/options_intraday.yaml`) and optional `option_styles.yaml`.
+    - By default writes under `data/bronze/ibkr/options/`.
+    - Can skip consolidation with `--skip-consolidation` if `ibkr_continuous_builder.py` is not present.
+  - Usage:
+    ```bash
+    python ibkr_data/get_ibkr_options.py --back-fill --config /path/to/options_intraday.yaml
+    python ibkr_data/get_ibkr_options.py --update --symbol SPY --skip-consolidation
     ```
 
 ### Parquet tools (`parquet/`)
@@ -92,6 +123,7 @@ Common dependencies:
 - `ib_insync` (for IBKR data fetchers)
 - `ibapi` (for contract details example)
 - `python-dotenv` (optional for `get_ticker_jsons.py`)
+- `PyYAML` (for `get_ibkr_options.py`)
 
 Example install:
 ```bash

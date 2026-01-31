@@ -16,4 +16,5 @@ crawl_dump.txt
 codexbotin.json
 *.parquet
 *.txt
+!requirements.txt
 **/.DS_Store
