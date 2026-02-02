@@ -117,6 +117,17 @@ These scripts expect IBKR TWS or IB Gateway to be running locally with API acces
     python parquet/sample_5k_parquet.py --directory /path/to/dir --all
     ```
 
+### CSV helpers (`csv/`)
+- `csv/extractrowsCSV.py` – Extract the first N data rows from CSVs and write `Small*.csv` files (default: 40,000 rows).
+  - Usage:
+    ```bash
+    python csv/extractrowsCSV.py /path/to/file.csv --rows 40000
+    python csv/extractrowsCSV.py /path/to/dir --rows 40000
+    ```
+  - Notes:
+    - Skips already-prefixed outputs (avoids `SmallSmall*.csv`).
+    - Use `--method stdlib` to avoid pandas.
+
 ### Sampling helpers (`sampler/`)
 - `sampler/sampler.py` – Sample the first N rows of CSV/TXT/Parquet files.
 - `sampler/sample-one-line.py` – Sample only the first row.
